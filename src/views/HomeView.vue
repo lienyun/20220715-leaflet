@@ -85,7 +85,6 @@
 import { LMap, LMarker, LTileLayer, LPopup } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
 import MarkerCluster from "../components/MarkerCluster.vue";
-// import "leaflet.markercluster";
 
 
 export default {
@@ -95,7 +94,7 @@ export default {
     LTileLayer,
     LMarker,
     LPopup,
-
+    MarkerCluster
   },
   data() {
     return {
