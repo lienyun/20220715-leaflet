@@ -18,26 +18,53 @@
         </div>
       </div>
     </div>
-    <div class="layout-container left-20 sm:top-20 bg-white w-60 pl-5 pb-5 pr-2 rounded-lg shadow-lg shadow-neutral-400" v-if="open">
+    <div class="layout-container left-20 sm:top-20 bg-white w-60 pl-5 pb-5 pr-2 rounded-lg shadow-lg shadow-neutral-400" v-if="open && bigSize">
       <!-- 顯示的資料 -->
       <div class="flex flex-col items-start">
-          <h5 class="text-center mt-4 mb-2 text-2xl font-bold tracking-tight text-rose-700 dark:text-white">總數：{{ counter
-          }}</h5>
+          <h5 class="text-center mt-4 mb-2 text-2xl font-bold tracking-tight text-rose-700 dark:text-white">共{{ counter
+          }}筆</h5>
           <ul class="">
             <!-- sum_request_processing_time -->
             <li class="text-black"><strong>總請求的時間： </strong>
               {{ sum_req }}</li>
               <!-- sum_target_processing_time -->
-            <li class="text-black"><strong>總目標處理時間： </strong>{{ sum_target }}</li>
+            <li class="text-black"><strong>總目標處理時間：</strong>{{ sum_target }}</li>
             <!-- sum_response_processing_time -->
-            <li class="text-black"><strong>總回應處理時間： </strong>{{ sum_res }}</li>
+            <li class="text-black"><strong>總回應處理時間：</strong>{{ sum_res }}</li>
             <!-- average_request_processing_time -->
-            <li class="text-black"><strong>平均請求的時間： </strong>{{ average_req }}</li>
+            <li class="text-black"><strong>平均請求的時間：</strong>{{ average_req }}</li>
             <!-- average_target_processing_time -->
-            <li class="text-black"><strong>平均目標處理時間： </strong>{{ average_target }}</li>
+            <li class="text-black"><strong>平均目標處理時間：</strong>{{ average_target }}</li>
             <!-- average_response_processing_time -->
-            <li class="text-black"><strong>平均回應處理時間： </strong>{{ average_res }}</li>
+            <li class="text-black"><strong>平均回應處理時間：</strong>{{ average_res }}</li>
           </ul>
+      </div>
+    </div>
+
+    <div class="layout-container left-16 sm:top-20 bg-white pl-5 pb-5 pr-2 rounded-lg shadow-lg shadow-neutral-400" v-if="open && smallSize">
+      <!-- 顯示的資料 -->
+      <div class="flex flex-col items-start ">
+          <h5 class="text-center text-2xl font-bold tracking-tight text-rose-700 dark:text-white">共{{ counter
+          }}筆</h5>
+          <div class="flex">
+            <ul class="flex flex-col items-start ">
+              <!-- sum_request_processing_time -->
+              <li class="text-black pr-5"><strong>總請求： </strong>
+                {{ sum_req }}</li>
+                <!-- sum_target_processing_time -->
+              <li class="text-black pr-5"><strong>總目標： </strong>{{ sum_target }}  </li>
+              <!-- sum_response_processing_time -->
+              <li class="text-black pr-5"><strong>總回應： </strong>{{ sum_res }}</li>
+            </ul>
+            <ul class="flex flex-col items-start">
+              <!-- average_request_processing_time -->
+              <li class="text-black pr-5"><strong>平均請求： </strong>{{ average_req }}</li>
+              <!-- average_target_processing_time -->
+              <li class="text-black pr-5"><strong>平均目標： </strong>{{ average_target }}</li>
+              <!-- average_response_processing_time -->
+              <li class="text-black pr-5"><strong>平均回應： </strong>{{ average_res }}</li>
+            </ul>
+          </div>
       </div>
     </div>
 
@@ -113,9 +140,35 @@ export default {
       average_target: '',
       average_res: '',
       open: false,
+      bigSize: null,
+      smallSize: null,
+      screenWidth: null,
+
     }
   },
   mounted() {
+    this.screenWidth = document.body.clientWidth
+    // 螢幕尺寸變化重新賦值
+    window.onresize = () => {
+      return (() => {
+        this.screenWidth = document.body.clientWidth
+      })()
+    }
+  },
+  watch: {
+    // 監聽螢幕尺寸
+    screenWidth: {
+      handler: function(val, oldVal){
+        if (val < 750) {
+          this.smallSize = true
+          this.bigSize = false
+        } else {
+          this.smallSize = false
+          this.bigSize = true
+        }
+      },
+      immediate: true
+    }
   },
   methods: {
     async onLeafletReady(api) {
