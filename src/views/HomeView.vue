@@ -8,13 +8,13 @@
       <!-- max-w-screen-sm -->
       <div class="w-full sm:flex sm:justify-between sm:items-center">
         <h1 class="text-white text-center text-3xl">博雲科技</h1>
-        <div class="flex justify-center">
+        <div class="flex justify-center pt-3 md:p-0">
           <button @click="changeTime('20220701-now.py.json'), open=false" 
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">20220701</button>
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">7/1</button>
           <button @click="changeTime('20220703.json'),open=false"
-            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-none">20220703</button>
-          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-none">近八小時</button>
-          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">近24小時</button>
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-none">7/3</button>
+          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-none">8hr</button>
+          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">24hr</button>
         </div>
       </div>
     </div>
